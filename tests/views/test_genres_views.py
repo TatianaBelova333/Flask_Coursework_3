@@ -3,15 +3,16 @@ import pytest
 from project.dao.models import Genre
 
 
+@pytest.fixture
+def genre(db):
+    g = Genre(name="Боевик")
+    db.session.add(g)
+    db.session.commit()
+    return g
+
+
 class TestGenresView:
     url = "/genres/"
-
-    @pytest.fixture
-    def genre(self, db):
-        g = Genre(name="Боевик")
-        db.session.add(g)
-        db.session.commit()
-        return g
 
     def test_get_genres(self, client, genre):
         response = client.get(self.url)
@@ -22,14 +23,7 @@ class TestGenresView:
 
 
 class TestGenreView:
-    url = "/genres/{genre_id}"
-
-    @pytest.fixture
-    def genre(self, db):
-        g = Genre(name="Боевик")
-        db.session.add(g)
-        db.session.commit()
-        return g
+    url = "/genres/{genre_id}/"
 
     def test_get_genre(self, client, genre):
         response = client.get(self.url.format(genre_id=genre.id))

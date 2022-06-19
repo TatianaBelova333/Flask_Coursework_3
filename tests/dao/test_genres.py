@@ -24,10 +24,10 @@ class TestGenreDAO:
         return g
 
     def test_get_genre_by_id(self, genre_1):
-        assert self.dao.get_by_id(genre_1.id) == genre_1
+        assert self.dao.get_by_id(genre_1.id) == genre_1, "Ошибка поиска genre по id"
 
     def test_get_genre_by_id_not_found(self):
-        assert self.dao.get_by_id(1) is None
+        assert self.dao.get_by_id(1) is None, "Ошибка поиска genre по несуществующему id"
 
     def test_get_all_genres(self, genre_1, genre_2):
-        assert self.dao.get_all() == [genre_1, genre_2]
+        assert self.dao.get_all() == [genre_1, genre_2], "Ошибка возврата всех genres"

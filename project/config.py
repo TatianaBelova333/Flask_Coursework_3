@@ -6,7 +6,9 @@ BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 class BaseConfig:
     SECRET_KEY = "you-will-never-guess"
+    JWT_AlGORITHM = 'HS256'
     JSON_AS_ASCII = False
+    RESTX_JSON = {'ensure_ascii': False, 'indent': 3, 'sort_keys': False}
 
     ITEMS_PER_PAGE = 12
 
@@ -28,5 +30,6 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-        os.path.dirname(BASEDIR), "project.db"
+        os.path.dirname(BASEDIR),
+        "project.db"
     )
